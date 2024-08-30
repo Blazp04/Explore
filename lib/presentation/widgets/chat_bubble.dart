@@ -3,9 +3,11 @@ import 'package:explore/_all.dart';
 class ChatBubble extends StatelessWidget {
   ChatBubble({
     super.key,
+    required this.onSubmitted,
     required this.onChanged,
   });
   void Function(String) onChanged;
+  void Function(String) onSubmitted;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,6 +28,7 @@ class ChatBubble extends StatelessWidget {
             ),
           ),
           onChanged: (value) => onChanged(value),
+          onSubmitted: (value) => onSubmitted(value),
         ),
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:explore/_all.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class SuggestionsPage extends StatelessWidget {
   SuggestionsPage({super.key});
+  static String routeName = '/suggestions';
 
   final TextEditingController bubbleChatController = TextEditingController();
 
@@ -10,15 +12,27 @@ class SuggestionsPage extends StatelessWidget {
     return ExploreScaffold(
       child: Column(
         children: [
-          const SuggestionChatCard(
-            question: 'Što danas ima u Mostaru',
-            answer: 'Danas u mostaru nema brate ništa',
+          BlocBuilder<ChatBloc, ChatState>(
+            builder: (context, chatState) {
+              return Skeletonizer(
+                enableSwitchAnimation: true,
+                enabled: chatState.status != ChatStateStatus.loaded,
+                child: SuggestionChatCard(
+                  question: chatState.questions?[0] ?? '',
+                  answer: chatState.suggestionModel?[0].text ?? '',
+                ),
+              );
+            },
           ),
           Expanded(
             child: Container(),
           ),
-          ChatBubble(
-            onChanged: (p0) => bubbleChatController.text = p0,
+          Hero(
+            tag: 'chatBubble',
+            child: ChatBubble(
+              onChanged: (p0) => bubbleChatController.text = p0,
+              onSubmitted: (p0) => print("RADIIII!!!!"),
+            ),
           ),
           const Gap(30),
         ],

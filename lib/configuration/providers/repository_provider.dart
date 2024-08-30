@@ -1,5 +1,4 @@
 import 'package:explore/_all.dart';
-import 'package:explore/domain/repository/chat_repository.dart';
 
 class RepositoryProviderConfig extends StatelessWidget {
   const RepositoryProviderConfig({required this.child, Key? key}) : super(key: key);
@@ -15,6 +14,9 @@ class RepositoryProviderConfig extends StatelessWidget {
         ),
         RepositoryProvider<IPromptSuggestionRepository>(
           create: (BuildContext context) => (PromptSuggestionRepository()),
+        ),
+        RepositoryProvider<IUserRepository>(
+          create: (BuildContext context) => (UserRepository()),
         ),
       ],
       child: child,

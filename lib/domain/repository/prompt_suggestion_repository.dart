@@ -8,6 +8,7 @@ class PromptSuggestionRepository implements IPromptSuggestionRepository {
   final api = services.get<DioConfiguration>();
   @override
   Future<List<PromptSuggestionModel>> getPromptSuggestions() async {
+    await Future.delayed(const Duration(seconds: 5));
     return [
       PromptSuggestionModel(
         title: "Prijedlog",

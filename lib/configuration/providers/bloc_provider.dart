@@ -10,13 +10,18 @@ class BlocProviderConfig extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ChatBloc>(
-          create: (context) => ChatBloc(),
+          create: (context) => ChatBloc(chatRepository: RepositoryProvider.of<IChatRepository>(context)),
         ),
         BlocProvider<PromptSuggestionBloc>(
           create: (context) => PromptSuggestionBloc(
             promptSuggestionRepository: RepositoryProvider.of<IPromptSuggestionRepository>(context),
           ),
-        )
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => UserBloc(
+            userRepository: RepositoryProvider.of<IUserRepository>(context),
+          ),
+        ),
       ],
       child: child,
     );
