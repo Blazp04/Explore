@@ -32,10 +32,5 @@ flutter:
   uses-material-design: true
   generate: true
 
-  # assets:
-  #   - assets/app_icons/
-  #   - assets/images/
-  #   - assets/icons/
-  #   - assets/images/flags/
-  #   - assets/images/drawer/
-  #   - assets/themes/
+  assets:
+    - assets/images/

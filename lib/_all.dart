@@ -4,6 +4,7 @@ export 'domain/_all.dart';
 export 'presentation/_all.dart';
 export 'startup/_all.dart';
 export 'configuration/_all.dart';
+export 'common/_all.dart';
 
 //? Packages //
 export 'package:get_it/get_it.dart';
