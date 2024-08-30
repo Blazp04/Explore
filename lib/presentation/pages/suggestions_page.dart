@@ -20,6 +20,7 @@ class SuggestionsPage extends StatelessWidget {
                 child: SuggestionChatCard(
                   question: chatState.questions?[0] ?? '',
                   answer: chatState.suggestionModel?[0].text ?? '',
+                  suggestions: chatState.suggestionModel?[0].placesModel ?? [],
                 ),
               );
             },
