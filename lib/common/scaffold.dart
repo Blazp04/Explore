@@ -17,7 +17,7 @@ class ExploreScaffold extends StatelessWidget {
             child: Container(
               width: context.screenHeight,
               height: context.screenHeight,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,

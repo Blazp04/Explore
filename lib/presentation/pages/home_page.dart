@@ -1,9 +1,20 @@
 import 'package:explore/_all.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final TextEditingController bubbleChatController = TextEditingController();
+
+  @override
+  void initState() {
+    context.read<PromptSuggestionBloc>().add(PromptSuggestionLoadEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +33,22 @@ class HomePage extends StatelessWidget {
           SizedBox(
             width: context.screenWidth - 40,
             height: 160,
-            child: ListView.builder(
-              itemCount: 10,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => PromptSuggestionCard(
-                onTap: () {},
-                title: 'Prijedlog',
-                subTitle: 'Šta ima za vidit u Mostaru',
-              ),
+            child: BlocBuilder<PromptSuggestionBloc, PromptSuggestionState>(
+              builder: (context, promptSuggestionState) {
+                if (promptSuggestionState is! PromptSuggestionLoadedState) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                return ListView.builder(
+                  itemCount: promptSuggestionState.promptSuggestions.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => PromptSuggestionCard(
+                    onTap: () {},
+                    title: promptSuggestionState.promptSuggestions[index].title,
+                    subTitle: promptSuggestionState.promptSuggestions[index].subtitle,
+                  ),
+                );
+              },
             ),
           ),
           const Gap(15),

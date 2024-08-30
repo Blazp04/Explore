@@ -13,6 +13,9 @@ class RepositoryProviderConfig extends StatelessWidget {
         RepositoryProvider<IChatRepository>(
           create: (BuildContext context) => ChatRepository(),
         ),
+        RepositoryProvider<IPromptSuggestionRepository>(
+          create: (BuildContext context) => (PromptSuggestionRepository()),
+        ),
       ],
       child: child,
     );

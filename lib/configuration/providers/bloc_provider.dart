@@ -9,8 +9,13 @@ class BlocProviderConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<ChatBloc>(
           create: (context) => ChatBloc(),
+        ),
+        BlocProvider<PromptSuggestionBloc>(
+          create: (context) => PromptSuggestionBloc(
+            promptSuggestionRepository: RepositoryProvider.of<IPromptSuggestionRepository>(context),
+          ),
         )
       ],
       child: child,
