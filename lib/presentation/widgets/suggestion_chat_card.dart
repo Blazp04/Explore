@@ -1,4 +1,5 @@
 import 'package:explore/_all.dart';
+import 'package:flutter/material.dart';
 
 class SuggestionChatCard extends StatelessWidget {
   const SuggestionChatCard({
@@ -89,7 +90,15 @@ class SuggestionChatCard extends StatelessWidget {
                             return SuggestionCard(
                               imagePath: suggestions[index].imageUrl,
                               name: suggestions[index].name,
-                              onTap: () {},
+                              onTap: () {
+                                showSuggestionDialog(
+                                  context: context,
+                                  title: suggestions[index].name,
+                                  description: suggestions[index].description,
+                                  url: suggestions[index].url,
+                                  imageUrl: suggestions[index].imageUrl,
+                                );
+                              },
                             );
                           }
                           return AnswerSuggestions(
@@ -177,4 +186,112 @@ class _AnswerSuggestionsState extends State<AnswerSuggestions> {
       ),
     );
   }
+}
+
+void showSuggestionDialog({
+  required BuildContext context,
+  required String title,
+  required String description,
+  required String url,
+  required String imageUrl,
+}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        insetPadding: EdgeInsets.zero,
+        contentPadding: EdgeInsets.zero,
+        clipBehavior: Clip.none,
+        surfaceTintColor: Colors.transparent,
+        content: IntrinsicHeight(
+          child: Container(
+            width: context.screenWidth * 0.8,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                  ),
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 20,
+                  ),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: AppColors.titleColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 20,
+                  ),
+                  child: Text(
+                    'Opis',
+                    style: const TextStyle(
+                      color: Color.fromARGB(199, 53, 52, 60),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Gap(10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    width: context.screenWidth * 0.8,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        print(url);
+                      },
+                      child: Text('Saznaj više'),
+                    ),
+                  ),
+                ),
+                Gap(10),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }

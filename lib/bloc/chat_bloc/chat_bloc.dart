@@ -40,7 +40,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         prompt: event.model.userQuestion,
         chatHistory: (state.pastConversation ?? '') + conversation,
       );
-      print(requestmodel.toString());
       final suggestionModel = await chatRepository.getChatSuggestions(model: requestmodel);
       List<SuggestionModel> model = [suggestionModel];
       if (state.suggestionModel != null) {
