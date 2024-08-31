@@ -18,8 +18,7 @@ class SuggestionChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.contain,
+    return IntrinsicHeight(
       child: Container(
         padding: const EdgeInsets.all(20),
         // height: 410,
@@ -81,12 +80,12 @@ class SuggestionChatCard extends StatelessWidget {
                     ),
                     const Gap(10),
                     SizedBox(
-                      height: type == 'places' ? 200 : 100,
+                      height: type == 'answer' ? 200 : 100,
                       child: ListView.builder(
-                        itemCount: type == 'places' ? suggestions.length : questionAnswers.length,
+                        itemCount: type == 'answer' ? suggestions.length : questionAnswers.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          if (type == 'places') {
+                          if (type == 'answer') {
                             return SuggestionCard(
                               imagePath: suggestions[index].imageUrl,
                               name: suggestions[index].name,
