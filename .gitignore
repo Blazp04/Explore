@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 
+
 # IntelliJ related
 *.iml
 *.ipr
@@ -44,3 +45,6 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+backend/node_modules
+backend/.env

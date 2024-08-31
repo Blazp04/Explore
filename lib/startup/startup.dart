@@ -8,9 +8,6 @@ class Startup {
 
     AppSettingsConfiguration.configure();
 
-    final appSettings = services.get<AppSettings>();
-    services.registerSingleton<DioConfiguration>(DioConfiguration(
-      appBaseUrl: appSettings.baseApiUrl,
-    ));
+    // services.registerSingleton<DioConfiguration>(DioConfiguration());
   }
 }

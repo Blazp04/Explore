@@ -19,7 +19,7 @@ export 'package:animated_splash_screen/animated_splash_screen.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:skeletonizer/skeletonizer.dart';
 // API
-export 'package:dio/dio.dart';
+// export 'package:dio/dio.dart';
 // Utils
 export 'package:dartx/dartx.dart';
 

@@ -5,7 +5,7 @@ abstract class IUserRepository {
 }
 
 class UserRepository implements IUserRepository {
-  final api = services.get<DioConfiguration>();
+  // final api = services.get<DioConfiguration>();
   @override
   Future<UserModel> getUserData() async {
     await Future.delayed(const Duration(seconds: 2));

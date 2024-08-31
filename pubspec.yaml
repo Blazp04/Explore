@@ -23,6 +23,7 @@ dependencies:
   path_provider: ^2.1.1
   equatable: ^2.0.5
   skeletonizer: ^1.4.2
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_flavorizr: ^2.2.2
