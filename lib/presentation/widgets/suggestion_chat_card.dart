@@ -1,5 +1,4 @@
 import 'package:explore/_all.dart';
-import 'package:flutter/material.dart';
 
 class SuggestionChatCard extends StatelessWidget {
   const SuggestionChatCard({
@@ -42,7 +41,7 @@ class SuggestionChatCard extends StatelessWidget {
           children: [
             Text(
               question,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColors.titleColor,
                 fontWeight: FontWeight.normal,
                 fontSize: 23,
@@ -72,7 +71,7 @@ class SuggestionChatCard extends StatelessWidget {
                   children: [
                     Text(
                       answer,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.titleColor,
                         fontWeight: FontWeight.normal,
                         fontSize: 22,
@@ -115,7 +114,7 @@ class SuggestionChatCard extends StatelessWidget {
                         },
                       ),
                     ),
-                    Gap(15)
+                    const Gap(15)
                   ],
                 ),
               ),
@@ -143,7 +142,7 @@ class AnswerSuggestions extends StatefulWidget {
 }
 
 class _AnswerSuggestionsState extends State<AnswerSuggestions> {
-  Color backgrondColor = Color(0xFFFFFFFF);
+  Color backgrondColor = const Color(0xFFFFFFFF);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -243,14 +242,14 @@ void showSuggestionDialog({
                     textAlign: TextAlign.left,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
+                const Padding(
+                  padding: EdgeInsets.only(
                     top: 10,
                     left: 20,
                   ),
                   child: Text(
                     'Opis',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Color.fromARGB(199, 53, 52, 60),
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -273,20 +272,20 @@ void showSuggestionDialog({
                     textAlign: TextAlign.left,
                   ),
                 ),
-                Gap(10),
+                const Gap(10),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SizedBox(
                     width: context.screenWidth * 0.8,
                     child: ElevatedButton(
                       onPressed: () {
                         print(url);
                       },
-                      child: Text('Saznaj više'),
+                      child: const Text('Saznaj više'),
                     ),
                   ),
                 ),
-                Gap(10),
+                const Gap(10),
               ],
             ),
           ),

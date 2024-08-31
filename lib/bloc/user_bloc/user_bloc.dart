@@ -1,5 +1,4 @@
 import 'package:explore/_all.dart';
-import 'package:explore/domain/repository/user_repository.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';

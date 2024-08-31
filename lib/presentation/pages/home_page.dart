@@ -52,7 +52,12 @@ class _HomePageState extends State<HomePage> {
                     itemCount: (promptSuggestionState is PromptSuggestionLoadedState) ? promptSuggestionState.promptSuggestions.length : 5,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => PromptSuggestionCard(
-                      onTap: () {},
+                      onTap: () {
+                        context.read<ChatBloc>().add(
+                              GetSuggestionsEvent(question: (promptSuggestionState is PromptSuggestionLoadedState) ? promptSuggestionState.promptSuggestions[index].subtitle : "Loading..."),
+                            );
+                        context.pushNamed(SuggestionsPage.routeName);
+                      },
                       title: (promptSuggestionState is PromptSuggestionLoadedState) ? promptSuggestionState.promptSuggestions[index].title : "Loading...",
                       subTitle: (promptSuggestionState is PromptSuggestionLoadedState) ? promptSuggestionState.promptSuggestions[index].subtitle : "Loading...",
                     ),

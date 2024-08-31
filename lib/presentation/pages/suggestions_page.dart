@@ -1,5 +1,4 @@
 import 'package:explore/_all.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class SuggestionsPage extends StatelessWidget {
   SuggestionsPage({super.key});

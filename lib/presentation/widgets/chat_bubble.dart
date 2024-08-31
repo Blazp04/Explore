@@ -19,7 +19,14 @@ class ChatBubble extends StatelessWidget {
         ),
         child: TextField(
           decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.delete, color: Colors.red),
+            prefixIcon: GestureDetector(
+                onTap: () {
+                  context.pushNamed(HomePage.routeName);
+                },
+                child: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                )),
             hintText: 'Što danas tražimo',
             hintStyle: const TextStyle(color: Colors.grey),
             border: OutlineInputBorder(

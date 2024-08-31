@@ -11,7 +11,7 @@ class App extends StatelessWidget {
           title: 'Explore',
           debugShowCheckedModeBanner: false,
           // theme: theme,
-          home: HomePage(),
+          home: const HomePage(),
           routes: AppRoutes.routes,
         ),
       ),
