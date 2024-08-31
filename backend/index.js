@@ -16,12 +16,23 @@ const port = 3000;
 
 
 app.post('/ask', async (req, res) => {
-    const { prompt } = req.body;
-    let answer = await functions.askChatGPT(prompt);
+    try {
+        const { prompt, chatHistory } = req.body;
 
-    console.log(answer);
+        let answer;
+        if (chatHistory != null) {
+            console.log('answer');
+            answer = await functions.askChatGPT(prompt, chatHistory);
+        } else {
+            answer = await functions.askChatGPT(prompt, undefined);
+        }
 
-    res.status(201).json({ message: answer });
+
+        res.status(201).json({ message: answer });
+    } catch (error) {
+        console.error('Error processing request:', error);
+        res.status(500).json({ message: 'An error occurred while processing your request' });
+    }
 });
 
 

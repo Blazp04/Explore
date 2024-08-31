@@ -2,11 +2,11 @@ const chat = require('./chat');
 
 
 
-async function askChatGPT(prompt) {
+async function askChatGPT(prompt, chatHistory) {
 
     let systemMessage = await chat.prepareDataForSystemMessage();
 
-    return await chat.generateGPTAnswer(prompt, systemMessage);
+    return await chat.generateGPTAnswer(prompt, systemMessage, chatHistory);
 
 
     return {

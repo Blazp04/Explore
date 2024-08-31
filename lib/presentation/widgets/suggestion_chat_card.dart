@@ -93,7 +93,14 @@ class SuggestionChatCard extends StatelessWidget {
                             );
                           }
                           return AnswerSuggestions(
-                            onTap: () {},
+                            onTap: () {
+                              final model = ChatHistoryRequestmodel(
+                                userQuestion: question,
+                                textFromGPT: answer,
+                                userAnswer: questionAnswers[index],
+                              );
+                              context.read<ChatBloc>().add(AnswerToSuggestedtQuestionEvent(model: model));
+                            },
                             title: questionAnswers[index],
                           );
                         },

@@ -10,7 +10,13 @@ const openAIHeader = {
 }
 
 
-async function generateGPTAnswer(prompt, systemMessage) {
+async function generateGPTAnswer(prompt, systemMessage, chatHistory) {
+    p = prompt
+    if (chatHistory != null) {
+        p = `${p}\nThose are snippets from past conversation. Use it to generate answer. \n${chatHistory} \n don't asky any more questions, you have your last question and my answer in userAnswer fiels. give me place suggestions`;
+    }
+    console.log(p)
+
     payload = {
         "model": model,
         "messages": [
@@ -20,7 +26,7 @@ async function generateGPTAnswer(prompt, systemMessage) {
             },
             {
                 "role": "user",
-                "content": prompt
+                "content": p
             }
         ],
         "response_format": {
@@ -112,8 +118,8 @@ async function generateGPTAnswer(prompt, systemMessage) {
 }
 
 function prepareDataForSystemMessage() {
-    return `You are Explore, an expert tourist guide. Your task is to provide the best possible answers to users' travel-related questions. Before delivering a response, you will think aloud to identify the key pieces of information needed to tailor your answer. For example, if the user asks about things to do in Mostar, you will consider factors such as the user's interests, preferences for types of events, and whether they are traveling alone or with a group. Your goal is to gather enough relevant information within the shortest amount of time, while limiting your inquiry to no more than 2 questions. For some questions like 'What is the most popular thing in Mostar' there is no need for additional questions, you can just answer, but if the question is more dynamic, ask the user a question. The only rule is that if you are asking questions you should not give an answer to the prompt. You can choose between asking a question and answering it. If you are not using one of the response formats, you should omit that field entirely.
-
+    message = `You are Explore, an expert tourist guide. Your task is to provide the best possible answers to users' travel-related questions. Before delivering a response, you will think aloud to identify the key pieces of information needed to tailor your answer. For example, if the user asks about things to do in Mostar, you will consider factors such as the user's interests, preferences for types of events, and whether they are traveling alone or with a group. Your goal is to gather enough relevant information within the shortest amount of time, while limiting your inquiry to no more than 2 questions. For some questions like 'What is the most popular thing in Mostar' there is no need for additional questions, you can just answer, but if the question is more dynamic, ask the user a question. The only rule is that if you are asking questions you should not give an answer to the prompt. You can choose between asking a question and answering it. If you are not using one of the response formats, you should omit that field entirely.
+You are not allowed to give any guggestions from other city. if in my prompt I asked you for mostar, you will answer for mostar
 Please format your response as a JSON object with the following structure:
 
 Those are 2 example of good answer
@@ -156,6 +162,9 @@ Those are 2 example of good answer
         }
     }
 `;
+
+
+    return message;
 }
 
 module.exports = { generateGPTAnswer, prepareDataForSystemMessage };

@@ -1,0 +1,1 @@
+ChatRequestModel(prompt: što ima u Mostaru, chatHistory: ChatHistoryRequestmodel(userQuestion: što ima u Mostaru, textFromGPT: Što te najviše zanima u Mostaru?, userAnswer: Noćni život))

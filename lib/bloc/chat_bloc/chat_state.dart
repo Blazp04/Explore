@@ -13,21 +13,26 @@ class ChatState {
   final ChatStateStatus status;
   final List<String>? questions;
 
+  final String? pastConversation;
+
   ChatState({
     this.suggestionModel,
     required this.status,
     this.questions,
+    this.pastConversation,
   });
 
   ChatState copyWith({
     List<SuggestionModel>? suggestionModel,
     ChatStateStatus? status,
     List<String>? questions,
+    String? pastConversation,
   }) {
     return ChatState(
       suggestionModel: suggestionModel ?? this.suggestionModel,
       status: status ?? this.status,
       questions: questions ?? this.questions,
+      pastConversation: pastConversation ?? this.pastConversation,
     );
   }
 }

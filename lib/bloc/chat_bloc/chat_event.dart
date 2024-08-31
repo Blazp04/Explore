@@ -10,3 +10,9 @@ final class GetSuggestionsEvent extends ChatEvent {
     required this.question,
   });
 }
+
+final class AnswerToSuggestedtQuestionEvent extends ChatEvent {
+  ChatHistoryRequestmodel model;
+
+  AnswerToSuggestedtQuestionEvent({required this.model});
+}
