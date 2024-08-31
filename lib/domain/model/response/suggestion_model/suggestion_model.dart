@@ -8,22 +8,26 @@ class SuggestionModel {
   final String text;
   final String actionType;
   final List<PlacesModel>? placesModel;
+  final List<String>? answers;
 
   SuggestionModel({
     required this.text,
     required this.actionType,
     required this.placesModel,
+    required this.answers,
   });
 
   SuggestionModel copyWith({
     String? text,
     String? actionType,
     List<PlacesModel>? placesModel,
+    List<String>? answers,
   }) {
     return SuggestionModel(
       text: text ?? this.text,
       actionType: actionType ?? this.actionType,
       placesModel: placesModel ?? this.placesModel,
+      answers: answers ?? this.answers,
     );
   }
 
@@ -31,6 +35,7 @@ class SuggestionModel {
     return SuggestionModel(
       text: map['text'] as String,
       actionType: map['action_type'] as String,
+      answers: (map['answers'] as List<dynamic>?)?.cast<String>(),
       placesModel: map['places'] != null
           ? List<PlacesModel>.from(
               (map['places']).map<PlacesModel?>(

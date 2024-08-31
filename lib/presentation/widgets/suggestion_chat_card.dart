@@ -1,17 +1,20 @@
 import 'package:explore/_all.dart';
-import 'package:flutter/material.dart';
 
 class SuggestionChatCard extends StatelessWidget {
   const SuggestionChatCard({
     required this.question,
     required this.answer,
     required this.suggestions,
+    required this.questionAnswers,
+    required this.type,
     super.key,
   });
 
   final String question;
   final String answer;
   final List<PlacesModel> suggestions;
+  final List<String> questionAnswers;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -76,17 +79,23 @@ class SuggestionChatCard extends StatelessWidget {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    const Gap(10),
+                    const Gap(20),
                     SizedBox(
-                      height: 200,
+                      height: type == 'places' ? 200 : 100,
                       child: ListView.builder(
-                        itemCount: suggestions.length,
+                        itemCount: type == 'places' ? suggestions.length : questionAnswers.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return SuggestionCard(
-                            imagePath: suggestions[index].imageUrl,
-                            name: suggestions[index].name,
+                          if (type == 'places') {
+                            return SuggestionCard(
+                              imagePath: suggestions[index].imageUrl,
+                              name: suggestions[index].name,
+                              onTap: () {},
+                            );
+                          }
+                          return AnswerSuggestions(
                             onTap: () {},
+                            title: questionAnswers[index],
                           );
                         },
                       ),
@@ -96,6 +105,67 @@ class SuggestionChatCard extends StatelessWidget {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AnswerSuggestions extends StatefulWidget {
+  const AnswerSuggestions({
+    required this.onTap,
+    required this.title,
+    super.key,
+  });
+
+  @override
+  final void Function() onTap;
+  final String title;
+
+  @override
+  State<AnswerSuggestions> createState() => _AnswerSuggestionsState();
+}
+
+class _AnswerSuggestionsState extends State<AnswerSuggestions> {
+  Color backgrondColor = Color(0xFFFFFFFF);
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        backgrondColor = AppColors.backGround2;
+        setState(() {});
+        widget.onTap();
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(60),
+            color: backgrondColor,
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF3C3B42).withOpacity(0.25),
+                blurRadius: 4,
+                spreadRadius: 0,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: Text(
+                widget.title,
+                style: const TextStyle(
+                  color: AppColors.titleColor,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
         ),
       ),
     );

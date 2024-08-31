@@ -62,15 +62,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const Gap(15),
-          Hero(
-            tag: 'chatBubble',
-            child: ChatBubble(
-              onChanged: (p0) => bubbleChatController.text = p0,
-              onSubmitted: (p0) {
-                context.read<ChatBloc>().add(GetSuggestionsEvent(question: p0));
-                context.pushNamed(SuggestionsPage.routeName);
-              },
-            ),
+          ChatBubble(
+            onChanged: (p0) => bubbleChatController.text = p0,
+            onSubmitted: (p0) {
+              context.read<ChatBloc>().add(GetSuggestionsEvent(question: p0));
+              context.pushNamed(SuggestionsPage.routeName);
+            },
           ),
           const Gap(30),
         ],

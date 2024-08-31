@@ -21,6 +21,8 @@ class SuggestionsPage extends StatelessWidget {
                   question: chatState.questions?[0] ?? '',
                   answer: chatState.suggestionModel?[0].text ?? '',
                   suggestions: chatState.suggestionModel?[0].placesModel ?? [],
+                  questionAnswers: chatState.suggestionModel?[0].answers ?? [],
+                  type: chatState.suggestionModel?[0].actionType ?? '',
                 ),
               );
             },
@@ -28,12 +30,12 @@ class SuggestionsPage extends StatelessWidget {
           Expanded(
             child: Container(),
           ),
-          Hero(
-            tag: 'chatBubble',
-            child: ChatBubble(
-              onChanged: (p0) => bubbleChatController.text = p0,
-              onSubmitted: (p0) => print("RADIIII!!!!"),
-            ),
+          ChatBubble(
+            onChanged: (p0) => bubbleChatController.text = p0,
+            onSubmitted: (p0) {
+              context.read<ChatBloc>().add(GetSuggestionsEvent(question: p0));
+              context.pushNamed(SuggestionsPage.routeName);
+            },
           ),
           const Gap(30),
         ],
