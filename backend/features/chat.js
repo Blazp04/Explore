@@ -32,86 +32,59 @@ async function generateGPTAnswer(prompt, systemMessage) {
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "magic": {
-                            "type": "string",
-                            "description": "A required string value representing the magic identifier"
-                        },
-                        "questions": {
-                            "type": "array",
-                            "description": "An optional array of questions",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "text": {
-                                        "type": "string",
-                                        "description": "The text of the question"
-                                    },
-                                    "answers": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "Text": {
-                                                    "type": "string",
-                                                    "description": "The text of the answer"
-                                                },
-                                                "Icon": {
-                                                    "type": "string",
-                                                    "enum": [
-                                                        "person",
-                                                        "people",
-                                                        "time",
-                                                        "town",
-                                                        "place",
-                                                        "event",
-                                                        "other"
-                                                    ],
-                                                    "description": "The type of icon representing the answer"
-                                                }
-                                            },
-                                            "required": [
-                                                "Text",
-                                                "Icon"
-                                            ]
-                                        }
+                        "result": {
+                            "type": "object",
+                            "properties": {
+                                "action_type": {
+                                    "type": "string",
+                                    "enum": ["question", "answer"]
+                                },
+                                "text": {
+                                    "type": "string"
+                                },
+                                "answers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
                                     }
                                 },
-                                "required": [
-                                    "text",
-                                    "answers"
-                                ]
-                            }
-                        },
-                        "answer": {
-                            "type": "array",
-                            "description": "An optional array of answers",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "Name": {
-                                        "type": "string",
-                                        "description": "The name of the answer"
-                                    },
-                                    "Type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "place",
-                                            "event"
-                                        ],
-                                        "description": "The type of the answer"
+                                "places": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/place"
                                     }
-                                },
-                                "required": [
-                                    "Name",
-                                    "Type"
-                                ]
-                            }
+                                }
+                            },
+                            "required": ["action_type", "text"]
                         }
                     },
-                    "required": [
-                        "magic"
-                    ],
+                    "definitions": {
+                        "place": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "imageUrl": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": ["place"]
+                                }
+                            },
+                            "required": ["name", "imageUrl", "description", "url", "type"]
+                        }
+                    },
                     "additionalProperties": false
+
+
                 }
 
             }
@@ -142,16 +115,47 @@ function prepareDataForSystemMessage() {
     return `You are Explore, an expert tourist guide. Your task is to provide the best possible answers to users' travel-related questions. Before delivering a response, you will think aloud to identify the key pieces of information needed to tailor your answer. For example, if the user asks about things to do in Mostar, you will consider factors such as the user's interests, preferences for types of events, and whether they are traveling alone or with a group. Your goal is to gather enough relevant information within the shortest amount of time, while limiting your inquiry to no more than 2 questions. For some questions like 'What is the most popular thing in Mostar' there is no need for additional questions, you can just answer, but if the question is more dynamic, ask the user a question. The only rule is that if you are asking questions you should not give an answer to the prompt. You can choose between asking a question and answering it. If you are not using one of the response formats, you should omit that field entirely.
 
 Please format your response as a JSON object with the following structure:
+
+Those are 2 example of good answer
+
 {
-    "result": [
-        {
-            "action_type": "magic" | "question" | "answer",
-            "content": string,
-            "title": string,
-            "type": "place" | "event" | null
+        "result": {
+            "action_type": "question",
+            "text": "Putuješ li sam ili s nekim",
+            "answers": [
+                "Putujem sam",
+                "Pitujem s curom",
+                "Putujem s obitelji",
+                "Putujem s prijateljem"
+            ]
         }
-    ]
-}`;
+    }
+
+    {
+        "result": {
+            "action_type": "answer",
+            "text": "Danas u mostaru nema ništa",
+            "places": [
+                {
+                    "name": 'Stari Mostar',
+                    "imageUrl": 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png',
+                    "description": 'description',
+                    "url": 'url',
+                    "type": "place"
+                },
+                {
+                    "name": 'Stari Mostar',
+                    "imageUrl": 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png',
+                    "description": 'description',
+                    "url": 'url',
+                    "type": "place"
+
+                }
+
+            ]
+        }
+    }
+`;
 }
 
 module.exports = { generateGPTAnswer, prepareDataForSystemMessage };

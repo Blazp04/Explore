@@ -13,7 +13,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Future getSuggestions(GetSuggestionsEvent event, Emitter emit) async {
     emit(ChatState(status: ChatStateStatus.loading));
     try {
-      final suggestionModel = await chatRepository.getChatSuggestions();
+      final ChatRequestModel requestmodel = ChatRequestModel(
+        prompt: event.question,
+      );
+      final suggestionModel = await chatRepository.getChatSuggestions(model: requestmodel);
       List<SuggestionModel> model = [suggestionModel];
       if (state.suggestionModel != null) {
         model = [...state.suggestionModel!, suggestionModel];

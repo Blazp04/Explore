@@ -56,7 +56,7 @@ class SuggestionCard extends StatelessWidget {
                     bottomLeft: Radius.circular(5),
                     bottomRight: Radius.circular(5),
                   ),
-                  child: Image.asset(
+                  child: Image.network(
                     imagePath,
                     fit: BoxFit.cover,
                   ),

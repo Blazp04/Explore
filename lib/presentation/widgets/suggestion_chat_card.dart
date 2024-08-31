@@ -79,7 +79,7 @@ class SuggestionChatCard extends StatelessWidget {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     SizedBox(
                       height: type == 'places' ? 200 : 100,
                       child: ListView.builder(
@@ -100,6 +100,7 @@ class SuggestionChatCard extends StatelessWidget {
                         },
                       ),
                     ),
+                    Gap(15)
                   ],
                 ),
               ),

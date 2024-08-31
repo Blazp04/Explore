@@ -4,9 +4,9 @@ const chat = require('./chat');
 
 async function askChatGPT(prompt) {
 
-    // let systemMessage = await chat.prepareDataForSystemMessage();
+    let systemMessage = await chat.prepareDataForSystemMessage();
 
-    // return await chat.generateGPTAnswer(prompt, systemMessage);
+    return await chat.generateGPTAnswer(prompt, systemMessage);
 
 
     return {
@@ -17,7 +17,7 @@ async function askChatGPT(prompt) {
                 "Putujem sam",
                 "Pitujem s curom",
                 "Putujem s obitelji",
-                "Putujem s prijateljem",
+                "Putujem s prijateljem"
             ]
         }
     }
