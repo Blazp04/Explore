@@ -24,6 +24,7 @@ dependencies:
   equatable: ^2.0.5
   skeletonizer: ^1.4.2
   http: ^1.2.2
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   flutter_flavorizr: ^2.2.2

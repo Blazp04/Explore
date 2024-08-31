@@ -12,11 +12,11 @@ class PromptSuggestionRepository implements IPromptSuggestionRepository {
     return [
       PromptSuggestionModel(
         title: "Prijedlog",
-        subtitle: "Što danas ima u Mostaru",
+        subtitle: "Što mogu posjetiti u Mostaru",
       ),
       PromptSuggestionModel(
         title: "Prijedlog",
-        subtitle: "Ima li večeras ijedan koncert u Mostaru",
+        subtitle: "3  kulturološke destinacije Zagreba",
       ),
       PromptSuggestionModel(
         title: "Prijedlog",
@@ -24,7 +24,7 @@ class PromptSuggestionRepository implements IPromptSuggestionRepository {
       ),
       PromptSuggestionModel(
         title: "Prijedlog",
-        subtitle: "Šta sve mogu posjetiti u Mostaru",
+        subtitle: "Znamenitosti Širokog brijega",
       ),
     ];
   }

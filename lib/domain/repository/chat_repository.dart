@@ -12,7 +12,7 @@ class ChatRepository implements IChatRepository {
   Future<SuggestionModel> getChatSuggestions({required ChatRequestModel model}) async {
     try {
       final response = await http.post(
-        Uri.parse('https://67a1-85-94-155-170.ngrok-free.app/ask'),
+        Uri.parse('https://a467-85-94-155-170.ngrok-free.app/ask'),
         headers: {
           'Content-Type': 'application/json',
         },

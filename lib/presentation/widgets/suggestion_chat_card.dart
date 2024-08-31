@@ -1,4 +1,5 @@
 import 'package:explore/_all.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SuggestionChatCard extends StatelessWidget {
   const SuggestionChatCard({
@@ -278,7 +279,8 @@ void showSuggestionDialog({
                   child: SizedBox(
                     width: context.screenWidth * 0.8,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
                         print(url);
                       },
                       child: const Text('Saznaj više'),
