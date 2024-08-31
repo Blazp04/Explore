@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   explore:
-    build: .
+    build: backend/.
     ports:
       - "3165:3165"
     environment:
