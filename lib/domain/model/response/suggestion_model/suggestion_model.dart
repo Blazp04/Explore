@@ -7,7 +7,7 @@ import 'package:explore/_all.dart';
 class SuggestionModel {
   final String text;
   final String actionType;
-  final List<PlacesModel> placesModel;
+  final List<PlacesModel>? placesModel;
 
   SuggestionModel({
     required this.text,
@@ -17,50 +17,42 @@ class SuggestionModel {
 
   SuggestionModel copyWith({
     String? text,
-    List<PlacesModel>? placesModel,
     String? actionType,
+    List<PlacesModel>? placesModel,
   }) {
     return SuggestionModel(
-      actionType: actionType ?? this.actionType,
       text: text ?? this.text,
+      actionType: actionType ?? this.actionType,
       placesModel: placesModel ?? this.placesModel,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'actionType': actionType,
-      'text': text,
-      'placesModel': placesModel.map((x) => x.toMap()).toList(),
-    };
-  }
-
   factory SuggestionModel.fromMap(Map<String, dynamic> map) {
     return SuggestionModel(
-      actionType: map['action_type'] as String,
       text: map['text'] as String,
-      placesModel: List<PlacesModel>.from(
-        (map['places']).map<PlacesModel>(
-          (x) => PlacesModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      actionType: map['action_type'] as String,
+      placesModel: map['places'] != null
+          ? List<PlacesModel>.from(
+              (map['places']).map<PlacesModel?>(
+                (x) => PlacesModel.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
     );
   }
-
-  String toJson() => json.encode(toMap());
 
   factory SuggestionModel.fromJson(String source) => SuggestionModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'SuggestionModel(text: $text, placesModel: $placesModel)';
+  String toString() => 'SuggestionModel(text: $text, actionType: $actionType, placesModel: $placesModel)';
 
   @override
   bool operator ==(covariant SuggestionModel other) {
     if (identical(this, other)) return true;
 
-    return other.text == text && listEquals(other.placesModel, placesModel);
+    return other.text == text && other.actionType == actionType && listEquals(other.placesModel, placesModel);
   }
 
   @override
-  int get hashCode => text.hashCode ^ placesModel.hashCode;
+  int get hashCode => text.hashCode ^ actionType.hashCode ^ placesModel.hashCode;
 }

@@ -8,6 +8,19 @@ async function askChatGPT(prompt) {
 
     // return await chat.generateGPTAnswer(prompt, systemMessage);
 
+
+    return {
+        "result": {
+            "action_type": "question",
+            "text": "Putuješ li sam ili s nekim",
+            "answers": [
+                "Putujem sam",
+                "Pitujem s curom",
+                "Putujem s obitelji",
+                "Putujem s prijateljem",
+            ]
+        }
+    }
     return {
         "result": {
             "action_type": "answer",
